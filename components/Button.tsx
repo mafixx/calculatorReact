@@ -1,5 +1,7 @@
 
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useTheme } from "../context/ThemeContext";
+import { colors } from "../styles/Colors";
 
 
 type Props = {
@@ -13,9 +15,10 @@ type Props = {
 export function Button(props: Props) {
     
     let backgroundColor = "#343434";
+    const { theme } = useTheme();
 
     if (props.isOrange) {
-        backgroundColor = "orange";
+        backgroundColor = theme === "dark" ? colors.buttonDark : colors.buttonLight;
     }  else if (props.isGray) {
         backgroundColor = "#a6a6a6";
     }
@@ -44,12 +47,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         margin: 8,
-        backgroundColor: "orange"
+        backgroundColor: "orange",
+        textAlignVertical: "center",
+        
     },
     text: {
+        display: "flex",
         fontSize: 40,
         color: "white",
-        
-        
+        justifyContent: "center",
+        alignItems: "center",
     }
 })
