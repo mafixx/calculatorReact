@@ -9,6 +9,8 @@ export default function App() {
 
   function handleOperation(operation: string){
     setOperation(operation);
+    setSecondNum(firstNum);
+    setFirstNum("");
   }
 
   function handleNumberPress (number: string) {
@@ -44,6 +46,37 @@ export default function App() {
     setFirstNum("");
     setSecondNum("");
     setOperation("");
+  }
+
+  function getResult(){
+    switch(operation){
+      case "+":
+        let result = Number(firstNum) + Number(secondNum);
+        handleClearPress();
+        setFirstNum(result.toString());
+        break;
+      case "-":
+        result = Number(firstNum) - Number(secondNum);
+        handleClearPress();
+        setFirstNum(result.toString());
+        break;
+      case "÷":
+        result = Number(firstNum) / Number(secondNum);
+        handleClearPress();
+        setFirstNum(result.toString());
+        break;
+      case "x":
+        result = Number(firstNum) * Number(secondNum);
+        handleClearPress();
+        setFirstNum(result.toString()); 
+        break;
+      case "%": 
+        break;
+      case "+/-":
+        break;
+      default:
+        handleClearPress();
+    }
   }
 
   return (
@@ -82,7 +115,7 @@ export default function App() {
         <Button text="." onPress={() => handleNumberPress(".")} />
         <Button text="0" onPress={() => handleNumberPress("0")} />
         <Button text="⌫" onPress={() => handleBackspace()} />
-        <Button text="=" onPress={() => handleOperation("=")} isOrange/>
+        <Button text="=" onPress={() => getResult()} isOrange/>
       </View>
     </View>
   );
